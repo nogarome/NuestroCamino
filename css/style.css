@@ -9,10 +9,14 @@ body {
 html{
     display: flex;
     align-items: flex-end;
+    box-sizing: border-box;
+    font-size: 62.5%;
+    /** Reset para REMS - 62.5% = 10px de 16px **/
+    font-family: 'Nunito', sans-serif;
 }
 
 body{
-    height: 93.22vh;
+    height: 100vh;
     justify-content: end; 
  }
  
@@ -82,7 +86,7 @@ margin-bottom: 130px;
     color: #333;
 }
 
-@media (min-width: 910px)  {
+@media (min-width: 850px)  {
    .cabecera{
        display: flex;
        flex-direction: row;
