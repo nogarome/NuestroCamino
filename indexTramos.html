@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mapa</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/concha.ico" />
+
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/leaflet-src.js"></script>
+
+    <!-- leaflet-gpx -->
+    <script src="js/gpx.js"></script>
+
+    <!-- leaflet-gpxgroup -->
+    <script src="js/leaflet-gpxgroup.js"></script>
+
+    <!-- leaflet-elevation -->
+    <link rel="stylesheet" href="css/leaflet-elevation.css" />
+    <script src="js/leaflet-elevation.js"></script>
+
+    <!-- Visor de imagenes -->
+    <script src="js/jquery-3.5.0.min.js"></script>
+
+    <link rel="stylesheet" href="css/lightbox.css" />
+
+    <script src="js/bouncemarker.js"></script>
+
+    <link rel="stylesheet" href="css/coordinatedimagepreview.css" />
+    <script src="js/coordinatedimagepreview.js"></script>
+
+    <!-- Mio -->
+    <script src="js/mFotos.js"></script>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <!-- <link rel="stylesheet" href="css/estilo1.css" /> -->
+    <link rel="stylesheet" href="css/styleTramos.css" />
+  </head>
+  <body>
+    <div class="cabecera">
+      <div class="logo"><img class="logoCamino" src="img/logoNC.png" /></div>
+      <nav class="menuppal">
+        <ul>
+          <li class="li"><a href="index.html">Inicio</a></li>          
+          <li class="li"><a href="indexDias.html">Por dias</a></li>
+          <li class="li"><a href="indexCompleto.html">Camino completo</a></li>
+        </ul>
+      </nav>
+      <img class="logo2" src="img/logo2.png" alt="" />
+    </div>
+    <div class="contenedorMapa">
+      <div id="map"></div>
+    </div>
+    <div
+      class="controlfotos"
+      id="coordinatedImagePreviewControlContainer"
+    ></div>
+    <script src="js/mapaTramos.js"></script>
+    <script src="js/lightbox.js"></script>
+  </body>
+</html>
