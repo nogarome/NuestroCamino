@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100vh;
+    height: 93.22vh;
     width: 100%;
     padding: 0px;
     margin: 0px;
@@ -10,7 +10,7 @@ html {
     box-sizing: border-box;
     font-size: 62.5%;
     /** Reset para REMS - 62.5% = 10px de 16px **/
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif;    
 }
 
 html{
@@ -90,13 +90,13 @@ body{
 
 .contenedorMapa {
     width: 100vw;
-    height: 86%;
+    height: 76vh;
     background-color: rgba(155, 208, 255, 0.6);
 }
 
 #map {
     width: 100vw;
-    height: 87%;
+    height: 100%;
 }
 
 .coordinatedImagePreviewControlButton {
@@ -104,7 +104,7 @@ body{
 }
 
 .leaflet-bottom {
-    bottom: 0;
+    bottom: 70px;
 }
 
 .leaflet-control-layers-expanded {
@@ -115,7 +115,7 @@ body{
 .leaflet-left .leaflet-control-layers-expanded {
     height: 60px;
     width: 70px;
-    bottom: 10px;
+    bottom: 80px;
 }
 
 .leaflet-control-layers-list {

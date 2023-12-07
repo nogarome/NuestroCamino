@@ -1,6 +1,6 @@
 html,
 body {
-    height: 100vh;
+    height: 93.22vh;
     width: 100%;
     padding: 0px;
     margin: 0px;
@@ -90,7 +90,7 @@ body{
 
 .contenedorMapa {
     width: 100vw;
-    height: 86%;
+    height: 76vh;
     background-color: rgba(155, 208, 255, 0.6);    
 }
 
@@ -98,7 +98,7 @@ body{
 
 #map {
     width: 100vw;
-    height: 87%;
+    height: 100%;
 }
 
 .coordinatedImagePreviewControlButton {
@@ -106,7 +106,7 @@ body{
 }
 
 .leaflet-bottom {
-    bottom: 0;
+    bottom:70px;
 }
 
 .leaflet-control-layers-expanded {
