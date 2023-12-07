@@ -13,6 +13,16 @@ html {
     font-family: 'Nunito', sans-serif;
 }
 
+html{
+    display: flex;
+    align-items: flex-end;
+}
+
+body{
+    height: 93.22vh;
+    justify-content: end; 
+ }
+
 .cabecera {
     height: 14%;
     display: flex;

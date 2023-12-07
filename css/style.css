@@ -6,6 +6,16 @@ body {
     margin: 0px;
 }
 
+html{
+    display: flex;
+    align-items: flex-end;
+}
+
+body{
+    height: 93.22vh;
+    justify-content: end; 
+ }
+ 
 .cabecera{    
     display: flex;
     flex-direction: column;
