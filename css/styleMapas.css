@@ -5,7 +5,7 @@
    ================================= */
 :root {
     --header-height: 80px;
-    /* Slightly taller for better touch targets */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
 }
 
 html {
@@ -42,12 +42,14 @@ a {
    Header / Cabecera (Compact Version)
    ================================= */
 .cabecera {
-    height: var(--header-height);
+    height: calc(var(--header-height) + var(--safe-area-inset-top));
+    padding-top: var(--safe-area-inset-top);
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--color-primary);
-    padding: 0 var(--spacing-md);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
     position: relative;
     z-index: 1000;
     box-shadow: var(--shadow-md);
