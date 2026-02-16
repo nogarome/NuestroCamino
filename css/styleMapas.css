@@ -13,6 +13,9 @@ html {
     box-sizing: border-box;
     font-size: 62.5%;
     height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
 }
 
 *,
@@ -31,6 +34,8 @@ body {
     font-family: var(--font-main);
     background-color: var(--color-bg);
     overflow: hidden;
+    position: fixed;
+    overscroll-behavior: none;
     /* Prevent body scroll, map handles it */
 }
 

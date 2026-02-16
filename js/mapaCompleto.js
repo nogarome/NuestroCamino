@@ -131,7 +131,7 @@ var opts = {
     elevation: true,
     elevation_options: {
       theme: "steelblue-theme",
-      detachedView: true,
+      detachedView: false,
       elevationDiv: '#elevation-div',
       followPositionMarker: true,
       zFollow: 12,

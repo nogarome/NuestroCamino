@@ -336,9 +336,9 @@ L.GpxGroup = L.Class.extend({
       }
       map.flyToBounds(e.layer.getBounds());
     }
-    e.input.scrollIntoView({
+    /* e.input.scrollIntoView({
       behavior: 'smooth'
-    });
+    }); */
     for (var j in layers) {
       var selected = layers[j].isSelected();
       var legend = L.DomUtil.get('legend_' + layers[j]._leaflet_id);
