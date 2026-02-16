@@ -6,6 +6,7 @@
 :root {
     --header-height: 80px;
     --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 html {
@@ -25,7 +26,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
     width: 100%;
     font-family: var(--font-main);
     background-color: var(--color-bg);
@@ -43,7 +44,8 @@ a {
    ================================= */
 .cabecera {
     height: calc(var(--header-height) + var(--safe-area-inset-top));
-    padding-top: var(--safe-area-inset-top);
+    padding-top: calc(var(--safe-area-inset-top) + 10px);
+    /* Extra space for visibility */
     display: flex;
     justify-content: space-between;
     align-items: center;

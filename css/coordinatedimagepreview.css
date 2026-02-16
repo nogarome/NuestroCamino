@@ -56,14 +56,15 @@
     background-image: url('../img/icon/cerrar_img.png');
 } */
 
-.coordinatedImagePreviewControlMainDiv{
+.coordinatedImagePreviewControlMainDiv {
     z-index: 400;
     position: absolute;
     visibility: hidden;
     width: 100%;
-    
-    background-color:transparent;
+
+    background-color: transparent;
     bottom: 0px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     border-style: solid;
     border-color: #566b13;
     border-width: 0px 0px 0px 0px;
@@ -82,12 +83,11 @@
     white-space: nowrap;
     padding-left: 0px;
     bottom: 10px;
-    
+
 }
 
 .coordinatedImagePreviewControlLi {
     display: inline;
     margin-right: 2px;
-    
-}
 
+}
