@@ -219,8 +219,8 @@ main.contenedorMapa {
 }
 
 .leaflet-bottom {
-    bottom: 90px;
-    /* Increased from 30px to clear the photo strip */
+    bottom: calc(120px + var(--safe-area-inset-bottom)) !important;
+    z-index: 2500 !important;
 }
 
 /* Give some space from bottom */
