@@ -181,6 +181,8 @@ main.contenedorMapa {
     width: 100%;
     flex-grow: 1;
     position: relative;
+    padding-bottom: calc(90px + var(--safe-area-inset-bottom));
+    /* Reserve space for photos */
 }
 
 #map {
