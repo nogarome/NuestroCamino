@@ -1,0 +1,195 @@
+/* =================================
+   Variables & Global Styles
+   ================================= */
+:root {
+  --color-primary: rgb(4, 4, 86);
+  --color-primary-dark: rgb(24, 24, 126);
+  --color-primary-darker: rgb(1, 1, 62);
+  --color-accent: #4682b4;
+  --color-bg-transparent: rgba(155, 208, 255, 0.6);
+  --font-primary: 'Nunito', sans-serif;
+  --header-height: 90px; /* Altura fija para la cabecera */
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /** Reset para REMS - 62.5% = 10px de 16px **/
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+/* =================================
+   Header / Cabecera
+   ================================= */
+.cabecera {
+  height: var(--header-height);
+  display: flex;
+  flex-shrink: 0; /* Evita que la cabecera se encoja */
+}
+
+.logo {
+  height: 100%;
+  width: 128.1px;
+  background-color: var(--color-primary-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoCamino {
+    height: 100%;
+}
+
+.menuppal {
+  background-color: var(--color-bg-transparent);
+  display: flex;
+  flex-grow: 1; /* Ocupa el espacio restante */
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto; /* Permite el scroll si el menú es más alto que la cabecera */
+}
+
+.menuppal ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Apila los elementos del menú verticalmente en móviles */
+    justify-content: center;
+    align-items: center; /* Centra los elementos del menú */
+    gap: 5px; /* Espacio entre los elementos del menú */
+}
+
+.menuppal ul li {
+    width: 85%; /* Ancho flexible para adaptarse a pantallas pequeñas */
+    max-width: 320px; /* Ancho máximo para que no se estire demasiado en tablets */
+    list-style: none;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 3px;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #4682b4;
+}
+
+.menuppal ul li a {
+    text-decoration: none;
+    color: var(--color-primary);
+    display: block; /* Para que el enlace ocupe todo el li */
+}
+
+.menuppal ul li a:hover {
+    color: #333;
+}
+
+.logo2{
+    display: none;
+    height: 100%;
+    padding: 5px;
+}
+
+/* =================================
+   Map Container
+   ================================= */
+.contenedorMapa {
+  width: 100%;
+  flex-grow: 1; /* Ocupa todo el espacio vertical restante */
+  background-color: var(--color-bg-transparent);
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* =================================
+   Leaflet Plugin Overrides
+   ================================= */
+
+.coordinatedImagePreviewControlButton {
+    display: none;
+}
+
+.leaflet-bottom {
+    bottom: 70px;
+}
+
+.leaflet-control-layers-expanded {
+    max-height: 30vh; /* Altura máxima relativa para mejor uso en móviles */
+    overflow: auto;
+}
+
+.leaflet-left .leaflet-control-layers-expanded {
+    max-height: 25vh; /* Altura máxima relativa para mejor uso en móviles */
+    width: 70px;
+    bottom: 80px;
+}
+
+.leaflet-control-layers-list {
+    font-size: 0.9rem;
+}
+
+.leaflet-right .leaflet-control-layers-toggle {
+    background-image: url(../img/icon/caminantes2.png);
+}
+
+/* Elevation Plugin */
+.steelblue-theme.leaflet-control.elevation .background {
+    background-color: var(--color-bg-transparent);
+    border-radius: 8px;
+    margin-right: -10px;
+}
+
+.elevation-summary {
+    color: var(--color-primary-darker);
+    font-size: 1.5rem;
+    background-color: var(--color-bg-transparent);
+    border-radius: 8px;
+    margin-right: -10px;
+}
+
+.totlen,
+.maxele {
+    margin-left: 10px;
+}
+
+/* =================================
+   Responsive Styles
+   ================================= */
+@media (min-width: 850px) {
+    .menuppal ul {
+        margin: 0;
+        padding: 0; /* Restablecer padding para escritorio */
+        width: 100%;
+        display: flex;
+        flex-direction: row; /* Menú horizontal en pantallas grandes */
+        gap: 50px;
+    }
+
+    .menuppal ul li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px; /* Ancho fijo para escritorio */
+    }
+    .logo2{
+        display: block;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestro Camino de Santiago</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/concha.ico" />
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/leaflet-elevation.css" />
+    <link rel="stylesheet" href="css/lightbox.css" />
+    <link rel="stylesheet" href="css/coordinatedimagepreview.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/styleMapas.css" />
+  </head>
+  <body>
+    <!-- LÍNEA NUEVA: Declaramos 'map' en un lugar público -->
+    <script>var map;</script> 
+
+    <header class="cabecera"></header>
+
+    <main class="contenedorMapa">
+      <div id="map"></div>
+    </main>
+
+    <div class="controlfotos" id="coordinatedImagePreviewControlContainer"></div>
+
+    <!-- Scripts de librerías -->
+    <script src="js/leaflet-src.js"></script>
+    <script src="js/gpx.js"></script>
+    <script src="js/leaflet-gpxgroup.js"></script>
+    <script src="js/leaflet-elevation.js"></script>
+    <script src="js/jquery-3.5.0.min.js"></script>
+    <script src="js/bouncemarker.js"></script>
+    <script src="js/coordinatedimagepreview.js"></script>
+    <script src="js/lightbox.js"></script>
+
+    <!-- Mis Scripts -->
+    <script src="js/components.js"></script>
+    <script src="js/mFotos.js"></script>
+    <script src="js/mapaDias.js"></script>
+
+    <!-- Script de Arranque -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        renderHeader('indexDias.html');
+      });
+    </script>
+  </body>
+</html>

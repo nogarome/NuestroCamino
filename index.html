@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestro Camino de Santiago</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/concha.ico" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a2b4b" />
+    
+  </head>
+  <div class="app">
+  <body>
+    <header class="cabecera">
+      <div class="header-content">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              class="logoCamino"
+              src="img/logoNC.png"
+              alt="Logo de Nuestro Camino"
+            />
+          </a>
+        </div>
+
+        <div class="header-texto">
+          <h1>Nuestro Camino de Santiago</h1>
+          <p>
+            Una crónica de nuestro viaje, paso a paso. Descubre los detalles de
+            cada etapa, nuestras fotos y los trazados de la ruta. ¡Buen camino,
+            peregrino!
+          </p>
+        </div>
+
+        <nav class="menuppal">
+          <ul>
+            <li>
+              <a href="index.html" class="active" aria-current="page">Inicio</a>
+            </li>
+            <li><a href="indexDias.html">Por días</a></li>
+            <li><a href="indexTramos.html">Por tramos</a></li>
+            <li><a href="indexCompleto.html">Camino completo</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="logo2">
+        <img src="img/logo2.png" alt="Logo del Xacobeo 2021" />
+      </div>
+    </header>
+
+    <main class="contenido-principal">
+      <!-- Future content can go here -->
+    </main>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then(() => console.log("Service Worker registrado"))
+            .catch((err) => console.error("SW error:", err));
+        });
+      }
+    </script>
+  </body>
+</div>
+</html>

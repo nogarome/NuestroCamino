@@ -1,0 +1,269 @@
+@import url('variables.css');
+
+/* =================================
+   Global Styles & Reset
+   ================================= */
+:root {
+    --header-height: 80px;
+    /* Slightly taller for better touch targets */
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    overflow: hidden;
+    /* Prevent body scroll, map handles it */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =================================
+   Header / Cabecera (Compact Version)
+   ================================= */
+.cabecera {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-primary);
+    padding: 0 var(--spacing-md);
+    position: relative;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+}
+
+/* Logo */
+.logo {
+    width: 60px;
+    /* Smaller in map view */
+    height: 60px;
+    background-color: var(--color-surface);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-accent);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.logoCamino {
+    width: 70%;
+    height: auto;
+}
+
+.logo2 {
+    display: none;
+    /* Hide Xacobeo logo on mobile map view */
+}
+
+/* =================================
+   Navigation / Menu
+   ================================= */
+
+/* Hamburger Button */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 1002;
+}
+
+.hamburger-bar {
+    width: 30px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 3px;
+    transition: var(--transition-normal);
+}
+
+.menu-toggle:hover .hamburger-bar {
+    background-color: var(--color-surface);
+}
+
+.menu-toggle.is-active .hamburger-bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.is-active .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.is-active .hamburger-bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Menu List (Mobile First) */
+.menuppal ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(26, 43, 75, 0.95);
+    /* Primary color with opacity */
+    backdrop-filter: blur(10px);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10rem;
+    gap: var(--spacing-md);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.menuppal ul.is-active {
+    transform: translateX(0);
+}
+
+.menuppal ul li a {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-surface);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-full);
+    transition: var(--transition-fast);
+}
+
+.menuppal ul li a:hover,
+.menuppal ul li a.active {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+/* =================================
+   Leaflet & Map Controls
+   ================================= */
+main.contenedorMapa {
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.coordinatedImagePreviewControlButton {
+    display: none;
+}
+
+/* Customizing Leaflet Controls to match theme */
+.leaflet-control-layers-toggle {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-sm);
+}
+
+.leaflet-bar a {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border-color: var(--color-border);
+}
+
+.leaflet-bar a:hover {
+    background-color: var(--color-bg);
+}
+
+.leaflet-bottom {
+    bottom: 90px;
+    /* Increased from 30px to clear the photo strip */
+}
+
+/* Give some space from bottom */
+
+.elevation-summary {
+    font-family: var(--font-main);
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: var(--color-primary) !important;
+    box-shadow: var(--shadow-sm);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.elevation-summary .trackname {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+}
+
+/* =================================
+   Desktop Styles
+   ================================= */
+@media (min-width: 850px) {
+    .menu-toggle {
+        display: none;
+    }
+
+    .logo2 {
+        display: block;
+        height: 50px;
+        width: auto;
+    }
+
+    .logo2 img {
+        height: 100%;
+        width: auto;
+    }
+
+    .menuppal ul {
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        backdrop-filter: none;
+        transform: none;
+        flex-direction: row;
+        padding-top: 0;
+        box-shadow: none;
+        gap: var(--spacing-sm);
+    }
+
+    .menuppal ul li a {
+        font-size: 1.6rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+}
