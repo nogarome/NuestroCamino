@@ -95,7 +95,7 @@ function initializeMap(pageConfig) {
   }
 
   // --- 3. Inicializar el Mapa y las Capas ---
-  const map = L.map("map", defaultConfig.map);
+  window.map = L.map("map", defaultConfig.map);
   const baseLayers = {
     Satelite: L.tileLayer(
       defaultConfig.tileLayers.satellite.url,

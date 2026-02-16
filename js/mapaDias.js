@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     pointsData: points,
     gpxGroupOptions: {
       elevation_options: {
-        detachedView: false, // Queremos el gráfico dentro del mapa (como en las fotos)
+        detachedView: false,
       }
     }
   };
