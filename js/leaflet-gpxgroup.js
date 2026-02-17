@@ -142,6 +142,7 @@ L.GpxGroup = L.Class.extend({
     this._loadedCount = 0;
     this._tracks = tracks;
     this._routes = {};
+    this._routesByIndex = [];
     this._layers = L.featureGroup();
     this._markers = L.featureGroup();
     this._elevation = L.control.elevation(this.options.elevation_options);
@@ -176,17 +177,17 @@ L.GpxGroup = L.Class.extend({
 
     this.on('selection_changed', this._onSelectionChanged, this);
     this._map.on('legend_selected', this._onLegendSelected, this);
-    this._tracks.forEach(this.addTrack, this);
+    this._tracks.forEach((track, index) => this.addTrack(track, index), this);
 
   },
 
-  addTrack: function(track) {
-    this._get(track, this._loadRoute.bind(this));
+  addTrack: function(track, index) {
+    this._get(track, (data) => this._loadRoute(data, index));
   },
 
-  _loadRoute: function(data) {
+  _loadRoute: function(data, index) {
     var colors = this._uniqueColors(this._tracks.length);
-    var color = colors[this._count++];
+    var color = colors[index];
 
     var line_style = {
       color: color,
@@ -213,6 +214,7 @@ L.GpxGroup = L.Class.extend({
 
     route.addTo(this._layers);
     this._routes[route._leaflet_id] = route;
+    this._routesByIndex[index] = route;
   },
 
   _onRouteAddLine: function(route, e) {
@@ -279,9 +281,6 @@ L.GpxGroup = L.Class.extend({
   },
 
   _onRouteLoaded: function(route) {
-    if (this.options.legend) {
-      this._legend.addBaseLayer(route, '<svg id="legend_' + route._leaflet_id + '" width="25" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">' + '<line x1="0" x2="50" y1="5" y2="5" stroke="' + route.options.polyline_options.color + '" fill="transparent" stroke-width="5" /></svg>' + ' ' + route.get_name());
-    }
     this.fire('route_loaded', {
       route: route,
     });
@@ -295,6 +294,9 @@ L.GpxGroup = L.Class.extend({
         });
       }
       if (this.options.legend) {
+        this._routesByIndex.forEach(function(r) {
+          this._legend.addBaseLayer(r, '<svg id="legend_' + r._leaflet_id + '" width="25" height="10" version="1.1" xmlns="http://www.w3.org/2000/svg">' + '<line x1="0" x2="50" y1="5" y2="5" stroke="' + r.options.polyline_options.color + '" fill="transparent" stroke-width="5" /></svg>' + ' ' + r.get_name());
+        }, this);
         this._legend.addTo(this._map);
       }
     }
