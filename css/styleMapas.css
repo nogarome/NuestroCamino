@@ -208,6 +208,27 @@ main.contenedorMapa {
     border-radius: var(--radius-sm);
 }
 
+/* Scroll para la lista de rutas (legend) */
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Estilo de la barra de scroll para navegadores webkit */
+.leaflet-control-layers-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.leaflet-control-layers-list::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border-radius: 10px;
+}
+
 .leaflet-bar a {
     background-color: var(--color-surface);
     color: var(--color-primary);
@@ -217,6 +238,8 @@ main.contenedorMapa {
 .leaflet-bar a:hover {
     background-color: var(--color-bg);
 }
+
+
 
 .leaflet-bottom {
     bottom: calc(120px + var(--safe-area-inset-bottom)) !important;
