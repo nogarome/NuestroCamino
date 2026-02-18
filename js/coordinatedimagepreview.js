@@ -122,6 +122,25 @@
                         imageListElementMouseLeave(this);
                     });
 
+                    // Handle click/tap to separate marker display from lightbox on mobile
+                    $("#coordinatedImagePreviewControlLi" + i + " a").on('click', function (e) {
+                        var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                        var $li = $(this).closest('li');
+                        var index = parseInt($li.attr('id').substr(32));
+
+                        if (isTouch) {
+                            if (window.activeCoordinatedImageIndex !== index) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                imageListElementMouseEnter($li[0]);
+                                window.activeCoordinatedImageIndex = index;
+                            } else {
+                                window.activeCoordinatedImageIndex = -1;
+                            }
+                        }
+                    });
+
                     $("#coordinatedImagePreviewControlLi" + i).mousedown(function () {
                         imageListElementMouseDown(this);
                     }); 
@@ -135,10 +154,15 @@
     function imageListElementMouseEnter(imageListElement) {
         var index = parseInt(imageListElement.id.substr(32));
         addTempMarker(lastImages[index]);
+        window.activeCoordinatedImageIndex = index;
     }
 
     function imageListElementMouseLeave() {
-        map.removeLayer(coordinatedImagePreviewControlTempMarker);
+        if (coordinatedImagePreviewControlTempMarker) {
+            map.removeLayer(coordinatedImagePreviewControlTempMarker);
+            coordinatedImagePreviewControlTempMarker = undefined;
+        }
+        window.activeCoordinatedImageIndex = -1;
     }
 
 

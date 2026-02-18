@@ -46,7 +46,7 @@
 }
 
 .leaflet-control.elevation .mouse-focus-label {
-    fill: #000;    
+    fill: #000000;    
     fill-opacity: .75;
     pointer-events: none
 }
@@ -95,7 +95,7 @@
 .leaflet-overlay-pane .height-focus-label {
     font-size: 14px;
     font-weight: 600;
-    fill: #000;
+    fill: #000000;
     paint-order: stroke;
     stroke: #ffffff;
     stroke-width: 2px
