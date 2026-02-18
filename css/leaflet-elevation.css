@@ -40,13 +40,13 @@
 }
 
 .leaflet-control.elevation .mouse-focus-line {
-    stroke: #0d1821;    
+    stroke: #0d1821;
     stroke-width: 1;
     pointer-events: none
 }
 
 .leaflet-control.elevation .mouse-focus-label {
-    fill: #000000;    
+    fill: #000000;
     fill-opacity: .75;
     pointer-events: none
 }
@@ -57,7 +57,7 @@
 }
 
 .leaflet-control.elevation .mouse-drag {
-    fill: rgba(255, 255, 255, 0.4);    
+    fill: rgba(255, 255, 255, 0.4);
 }
 
 .leaflet-control.elevation .elevation-toggle {
@@ -101,6 +101,13 @@
     stroke-width: 2px
 }
 
+.height-focus-label-rect {
+    fill: #ffffff !important;
+    fill-opacity: 0.9 !important;
+    stroke: #000000 !important;
+    stroke-width: 0.5px !important;
+}
+
 .lime-theme.leaflet-control.elevation .background {
     background-color: rgba(156, 194, 34, 0.2)
 }
@@ -127,7 +134,7 @@
 }
 
 .lime-theme.leaflet-control.elevation .mouse-focus-line {
-    stroke: #101404;    
+    stroke: #101404;
 }
 
 .lime-theme.height-focus {
@@ -145,11 +152,11 @@
 
 .steelblue-theme.leaflet-control.elevation .axis line,
 .steelblue-theme.leaflet-control.elevation .axis path {
-    stroke: #0d1821;    
+    stroke: #0d1821;
 }
 
 .steelblue-theme.leaflet-control.elevation .mouse-drag {
-    fill: rgba(23, 74, 117, 0.4);    
+    fill: rgba(23, 74, 117, 0.4);
 }
 
 .steelblue-theme.leaflet-control.elevation .elevation-toggle-icon {
@@ -161,12 +168,12 @@
 }
 
 .steelblue-theme.leaflet-control.elevation .mouse-focus-line {
-        stroke: #f90101
+    stroke: #f90101
 }
 
 .steelblue-theme.height-focus {
-    stroke: #fd0101;    
-    fill: #fbff00;    
+    stroke: #fd0101;
+    fill: #fbff00;
 }
 
 .steelblue-theme.elevation-polyline {

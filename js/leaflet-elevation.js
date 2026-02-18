@@ -939,6 +939,13 @@
     			.attr("cx", 0)
     			.attr("cy", 0);
 
+    		this._mouseHeightFocusLabelRect = heightG.append("svg:rect")
+    			.attr("class", theme + " height-focus-label-rect")
+    			.attr("rx", 3)
+    			.attr("ry", 3)
+    			.style("visibility", "hidden")
+    			.style("pointer-events", "none");
+
     		this._mouseHeightFocusLabel = heightG.append("svg:text")
     			.attr("class", theme + " height-focus-label")
     			.style("pointer-events", "none");
@@ -1248,6 +1255,9 @@
     		}
     		if (this._focusG) {
     			this._focusG.style("visibility", "hidden");
+    		}
+    		if (this._mouseHeightFocusLabelRect) {
+    			this._mouseHeightFocusLabelRect.style("visibility", "hidden");
     		}
     	},
 
@@ -1717,6 +1727,18 @@
     			.attr("y", normalizedY)
     			.text(numY + " " + this._yLabel)
     			.style("visibility", "visible");
+
+    		let labelNode = this._mouseHeightFocusLabel.node();
+    		if (this._isDomVisible(labelNode)) {
+    			let bbox = labelNode.getBBox();
+    			let padding = 4;
+    			this._mouseHeightFocusLabelRect
+    				.attr("x", bbox.x - padding)
+    				.attr("y", bbox.y - padding)
+    				.attr("width", bbox.width + (padding * 2))
+    				.attr("height", bbox.height + (padding * 2))
+    				.style("visibility", "visible");
+    		}
     	},
 
     	/**
