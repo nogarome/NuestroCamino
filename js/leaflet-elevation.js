@@ -1509,6 +1509,10 @@
     			this._hidePositionMarker();
     			this._showDiagramIndicator(item, xCoord);
     			this._showPositionMarker(item);
+
+    			if (this._map && this._map._container) {
+    				L.DomUtil.addClass(this._map._container, 'elechart-hover');
+    			}
     		}
     	},
 
@@ -1604,7 +1608,7 @@
     		if (!this._chartEnabled) return;
 
     		let opts = this.options;
-    		this._focusG.style("visibility", "visible");
+    		this._focusG.style("visibility", "visible").style("opacity", 1);
 
     		this._mousefocus.attr('x1', xCoordinate)
     			.attr('y1', 0)
@@ -1720,7 +1724,8 @@
     			.attr("x2", item.x)
     			.attr("y1", item.y)
     			.attr("y2", normalizedY)
-    			.style("visibility", "visible");
+    			.style("visibility", "visible")
+    			.style("opacity", 1);
 
     		this._mouseHeightFocusLabel
     			.attr("x", item.x)
@@ -1768,7 +1773,8 @@
     	_updatePointG: function(item) {
     		this._pointG
     			.attr("transform", "translate(" + item.x + "," + item.y + ")")
-    			.style("visibility", "visible");
+    			.style("visibility", "visible")
+    			.style("opacity", 1);
     	},
 
     	/**

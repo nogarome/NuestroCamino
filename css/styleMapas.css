@@ -190,8 +190,9 @@ main.contenedorMapa {
     z-index: 1;
 }
 
-#map.elechart-hover {
-    cursor: crosshair;
+#map.elechart-hover,
+#map.elechart-hover * {
+    cursor: crosshair !important;
 }
 
 /* Ajuste específico para la barra de fotos */
