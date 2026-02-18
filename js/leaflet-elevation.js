@@ -1247,17 +1247,17 @@
     			this._marker = null;
     		}
     		if (this._mouseHeightFocus) {
-    			this._mouseHeightFocus.style("visibility", "hidden");
-    			this._mouseHeightFocusLabel.style("visibility", "hidden");
+    			this._mouseHeightFocus.style("opacity", 0).style("visibility", "hidden");
+    			this._mouseHeightFocusLabel.style("opacity", 0).style("visibility", "hidden");
     		}
     		if (this._pointG) {
-    			this._pointG.style("visibility", "hidden");
+    			this._pointG.style("opacity", 0).style("visibility", "hidden");
     		}
     		if (this._focusG) {
-    			this._focusG.style("visibility", "hidden");
+    			this._focusG.style("opacity", 0).style("visibility", "hidden");
     		}
     		if (this._mouseHeightFocusLabelRect) {
-    			this._mouseHeightFocusLabelRect.style("visibility", "hidden");
+    			this._mouseHeightFocusLabelRect.style("opacity", 0).style("visibility", "hidden");
     		}
     	},
 
@@ -1726,7 +1726,8 @@
     			.attr("x", item.x)
     			.attr("y", normalizedY)
     			.text(numY + " " + this._yLabel)
-    			.style("visibility", "visible");
+    			.style("visibility", "visible")
+    			.style("opacity", 1);
 
     		let labelNode = this._mouseHeightFocusLabel.node();
     		if (this._isDomVisible(labelNode)) {
@@ -1737,7 +1738,8 @@
     				.attr("y", bbox.y - padding)
     				.attr("width", bbox.width + (padding * 2))
     				.attr("height", bbox.height + (padding * 2))
-    				.style("visibility", "visible");
+    				.style("visibility", "visible")
+    				.style("opacity", 1);
     		}
     	},
 

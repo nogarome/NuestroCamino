@@ -1,11 +1,23 @@
 .leaflet-control.elevation .background {
-    background-color: rgba(70, 130, 180, 0.2);
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-normal);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     overflow: visible
+}
+
+.leaflet-control.elevation-summary {
+    font-family: var(--font-main);
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px);
+    color: var(--color-primary) !important;
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition-normal);
 }
 
 .leaflet-control.elevation .axis line,
@@ -93,19 +105,25 @@
 }
 
 .leaflet-overlay-pane .height-focus-label {
-    font-size: 14px;
-    font-weight: 600;
-    fill: #000000;
+    font-size: 1.4rem;
+    font-weight: 800;
+    fill: var(--color-primary, #1a2b4b);
     paint-order: stroke;
     stroke: #ffffff;
-    stroke-width: 2px
+    stroke-width: 3px;
+    transition: opacity var(--transition-normal, 0.3s);
 }
 
 .height-focus-label-rect {
-    fill: #ffffff !important;
-    fill-opacity: 0.9 !important;
-    stroke: #000000 !important;
-    stroke-width: 0.5px !important;
+    fill: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(4px);
+    stroke: var(--color-accent, #d4a017) !important;
+    stroke-width: 1.5px !important;
+    rx: 6;
+    /* Smoother corners */
+    ry: 6;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: opacity var(--transition-normal, 0.3s);
 }
 
 .lime-theme.leaflet-control.elevation .background {
