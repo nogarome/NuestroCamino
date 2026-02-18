@@ -124,7 +124,7 @@
 
                     // Handle click/tap to separate marker display from lightbox on mobile
                     $("#coordinatedImagePreviewControlLi" + i + " a").on('click', function (e) {
-                        var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                        var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
                         var $li = $(this).closest('li');
                         var index = parseInt($li.attr('id').substr(32));
 
@@ -136,9 +136,15 @@
                                 imageListElementMouseEnter($li[0]);
                                 window.activeCoordinatedImageIndex = index;
                             } else {
+                                // Second tap: Reset and allow lightbox
                                 window.activeCoordinatedImageIndex = -1;
                             }
                         }
+                    });
+
+                    // Prevent long-press context menu on mobile thumbnails
+                    $("#coordinatedImagePreviewControlLi" + i).on('contextmenu', function (e) {
+                        e.preventDefault();
                     });
 
                     $("#coordinatedImagePreviewControlLi" + i).mousedown(function () {
@@ -154,7 +160,7 @@
     function imageListElementMouseEnter(imageListElement) {
         var index = parseInt(imageListElement.id.substr(32));
         addTempMarker(lastImages[index]);
-        window.activeCoordinatedImageIndex = index;
+        // DO NOT update window.activeCoordinatedImageIndex here to avoid emulated hover conflicts on mobile
     }
 
     function imageListElementMouseLeave() {
@@ -162,6 +168,8 @@
             map.removeLayer(coordinatedImagePreviewControlTempMarker);
             coordinatedImagePreviewControlTempMarker = undefined;
         }
+        // We only reset index if it wasn't a confirmed "touch" activation
+        // but for now, simple is better:
         window.activeCoordinatedImageIndex = -1;
     }
 
