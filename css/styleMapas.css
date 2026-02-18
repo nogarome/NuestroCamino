@@ -267,13 +267,16 @@ main.contenedorMapa {
 
 .elevation-summary .trackname {
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     color: var(--color-accent);
     margin-bottom: 8px;
     border-bottom: 2px solid var(--color-accent);
     padding-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* =================================
