@@ -143,5 +143,9 @@ function initializeMap(pageConfig) {
     if (maxele) maxele.innerHTML = `${track.elevation_max.toFixed(2)} m`;
     const minele = q(".minele .summaryvalue");
     if (minele) minele.innerHTML = `${track.elevation_min.toFixed(2)} m`;
+    const elegain = q(".elegain .summaryvalue");
+    if (elegain) elegain.innerHTML = `${track.elevation_gain.toFixed(0)} m`;
+    const eleloss = q(".eleloss .summaryvalue");
+    if (eleloss) eleloss.innerHTML = `${track.elevation_loss.toFixed(0)} m`;
   });
 }

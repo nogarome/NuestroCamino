@@ -200,7 +200,9 @@
     				this.track_info = L.extend({}, this.track_info, {
     					distance: this._distance,
     					elevation_max: this._maxElevation,
-    					elevation_min: this._minElevation
+    					elevation_min: this._minElevation,
+    					elevation_gain: this._elevationGain,
+    					elevation_loss: this._elevationLoss
     				});
 
     				this._layers = this._layers || {};
@@ -653,9 +655,21 @@
     		}
 
     		z = z * this._heightFactor;
-
+    
     		// skip point if it has not elevation
     		if (!isNaN(z)) {
+    			if (data.length > 0) {
+    				let prevZ = data[data.length - 1].z;
+    				if (!isNaN(prevZ)) {
+    					let dz = z - prevZ;
+    					if (dz > 0) {
+    						this._elevationGain = (this._elevationGain || 0) + dz;
+    					} else {
+    						this._elevationLoss = (this._elevationLoss || 0) + Math.abs(dz);
+    					}
+    				}
+    			}
+    
     			eleMax = eleMax < z ? z : eleMax;
     			eleMin = eleMin > z ? z : eleMin;
     			this._lastValidZ = z;
@@ -1020,6 +1034,8 @@
     		this._distance = null;
     		this._maxElevation = null;
     		this._minElevation = null;
+    		this._elevationGain = null;
+    		this._elevationLoss = null;
     		this.track_info = null;
     		this._layers = null;
     		// if (this.layer) {
@@ -1808,8 +1824,21 @@
     			this.track_info.distance = this._distance || 0;
     			this.track_info.elevation_max = this._maxElevation || 0;
     			this.track_info.elevation_min = this._minElevation || 0;
+    			this.track_info.elevation_gain = this._elevationGain || 0;
+    			this.track_info.elevation_loss = this._elevationLoss || 0;
     			let name = this.track_info.name || "";
-    			d3.select(this.summaryDiv).html('<div class="trackname">' + name + '</div><span class="totlen"><span class="summarylabel">' + L._("Distancia: ") + '</span><span class="summaryvalue">' + this.track_info.distance.toFixed(2) + ' ' + this._xLabel + '</span></span> <br/> <span class="maxele"><span class="summarylabel">' + L._("Elevación Máx.: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_max.toFixed(2) + ' ' + this._yLabel + '</span></span> - <span class="minele"><span class="summarylabel">' + L._("Elevación Mín.: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_min.toFixed(2) + ' ' + this._yLabel + '</span></span>');
+    			d3.select(this.summaryDiv).html(
+    				'<div class="trackname">' + name + '</div>' +
+    				'<span class="totlen"><span class="summarylabel">' + L._("Distancia: ") + '</span><span class="summaryvalue">' + this.track_info.distance.toFixed(2) + ' ' + this._xLabel + '</span></span>' +
+    				' <br/> ' +
+    				'<span class="maxele"><span class="summarylabel">' + L._("Elevación Máx.: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_max.toFixed(2) + ' ' + this._yLabel + '</span></span>' +
+    				' - ' +
+    				'<span class="minele"><span class="summarylabel">' + L._("Elevación Mín.: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_min.toFixed(2) + ' ' + this._yLabel + '</span></span>' +
+    				' <br/> ' +
+    				'<span class="elegain"><span class="summarylabel">' + L._("Ascenso: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_gain.toFixed(0) + ' ' + this._yLabel + '</span></span>' +
+    				' - ' +
+    				'<span class="eleloss"><span class="summarylabel">' + L._("Descenso: ") + '</span><span class="summaryvalue">' + this.track_info.elevation_loss.toFixed(0) + ' ' + this._yLabel + '</span></span>'
+    			);
     		}
     		if (this.options.downloadLink && this._downloadURL) { // TODO: generate dynamically file content instead of using static file urls.
     			let span = document.createElement('span');
