@@ -1,0 +1,27 @@
+.coordinatedImagePreviewControlMainDiv {
+    z-index: 400;
+    position: absolute;
+    visibility: hidden;
+    width: 100%;
+    background-color: transparent;
+    bottom: 0px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border-style: solid;
+    border-color: #566b13;
+    border-width: 0px 0px 0px 0px;
+    box-shadow: 2px 2px 2px -2px gray;
+}
+
+.coordinatedImagePreviewControlUl {
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 0px;    
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-left: 0px;   
+}
+
+.coordinatedImagePreviewControlLi {
+    display: inline;
+    margin-right: 2px;
+}

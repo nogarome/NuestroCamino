@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Nuestro Camino de Santiago</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="img/concha.ico" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a2b4b" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="cabecera">
+        <div class="header-content">
+          <div class="logo">
+            <a href="index.html" aria-label="Volver al inicio">
+              <img
+                class="logoCamino"
+                src="img/logoNC.png"
+                alt="Logo de Nuestro Camino"
+              />
+            </a>
+          </div>
+
+          <div class="header-texto">
+            <h1>Nuestro Camino de Santiago</h1>
+            <p>
+              Una crónica de nuestro viaje, paso a paso. Descubre los detalles de
+              cada etapa, nuestras fotos y los trazados de la ruta. ¡Buen camino,
+              peregrino!
+            </p>
+          </div>
+
+          <nav class="menuppal" aria-label="Navegación principal">
+            <ul>
+              <li>
+                <a href="index.html" class="active" aria-current="page">Inicio</a>
+              </li>
+              <li><a href="indexDias.html">Por días</a></li>
+              <li><a href="indexTramos.html">Por tramos</a></li>
+              <li><a href="indexCompleto.html">Camino completo</a></li>              
+            </ul>
+          </nav>
+
+          <div class="logo2">
+            <img src="img/logo2.png" alt="Logo del Xacobeo" />
+          </div>
+        </div>
+      </header>
+
+      <main class="contenido-principal">
+        <div class="container">
+          <!-- Barra de estadísticas del viaje -->
+          <div class="stats-bar">
+            <div class="stat-item">
+              <div class="stat-number">32</div>
+              <div class="stat-label">Etapas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">780+</div>
+              <div class="stat-label">Kilómetros</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">+2.100</div>
+              <div class="stat-label">Fotografías</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">6</div>
+              <div class="stat-label">Tramos</div>
+            </div>
+          </div>
+
+          <!-- Modos de visualización -->
+          <section class="seccion-modos">
+            <h2 class="seccion-titulo">Explora Nuestro Viaje</h2>
+            <p class="seccion-subtitulo">
+              Selecciona cómo deseas recorrer nuestra experiencia a lo largo del Camino Francés:
+            </p>
+
+            <div class="modes-grid">
+              <article class="mode-card">
+                <div class="mode-icon" aria-hidden="true">📅</div>
+                <h3>Por Días</h3>
+                <p>
+                  Recorre las 32 etapas individuales con altimetría precisa, tiempos, distancias y fotos geolocalizadas de cada jornada.
+                </p>
+                <a href="indexDias.html" class="mode-btn">Ver Etapas</a>
+              </article>
+
+              <article class="mode-card">
+                <div class="mode-icon" aria-hidden="true">🚩</div>
+                <h3>Por Tramos</h3>
+                <p>
+                  Visualiza los 6 grandes tramos geográficos del Camino Francés agrupados por comunidades y regiones históricas.
+                </p>
+                <a href="indexTramos.html" class="mode-btn">Ver Tramos</a>
+              </article>
+
+              <article class="mode-card">
+                <div class="mode-icon" aria-hidden="true">🗺️</div>
+                <h3>Camino Completo</h3>
+                <p>
+                  La panorámica integral desde los Pirineos en Saint-Jean-Pied-de-Port hasta la Catedral de Santiago de Compostela.
+                </p>
+                <a href="indexCompleto.html" class="mode-btn">Ver Ruta Total</a>
+              </article>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="pie-pagina">
+        <div class="container">
+          <p><strong>Nuestro Camino de Santiago</strong> · ¡Ultreia et Suseia!</p>
+          <p>Crónica fotográfica y cartográfica paso a paso.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/components.js"></script>
+  </body>
+</html>

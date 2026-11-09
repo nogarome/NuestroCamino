@@ -1,0 +1,217 @@
+/* 
+ Created on : Jan 19, 2016
+ Author     : yeozkaya@gmail.com
+ */
+;
+(function ($) {
+
+    var options = {
+        imageServiceAddress: "testdata.json",
+        openButtonTitle: "Ver Fotografias",
+        closeButtonTitle: "Ocultar Fotografias",
+        limit: 10,
+        isOpen: false
+    };
+
+    var coordinatedImagePreviewControlTempMarker;
+    var lastImages;
+    var cachedGeoJson = null;
+    var isLoadingGeoJson = false;
+
+    function CoordinatedImagePreviewControl(item, userDefinedOptions) {
+        var keys = Object.keys(userDefinedOptions);
+        for (var i = 0; i < keys.length; i++) {
+            options[keys[i]] = userDefinedOptions[keys[i]];
+        }
+        this.item = $(item);
+        this.init();
+    }
+
+    CoordinatedImagePreviewControl.prototype = {
+        init: function () {
+            init(this.item);
+        }
+    };
+
+    $.fn.CoordinatedImagePreviewControl = function (userDefinedOptions) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return this.each(function () {
+            var item = $(this), instance = item.data('CoordinatedImagePreviewControl');
+            if (!instance) {
+                item.data('CoordinatedImagePreviewControl', new CoordinatedImagePreviewControl(this, userDefinedOptions));
+            } else {
+                if (typeof userDefinedOptions === 'string') {
+                    instance[userDefinedOptions].apply(instance, args);
+                }
+            }
+        });
+    };
+
+    function init(item) {
+        var element = item;
+        element.addClass("coordinatedImagePreviewControlContainer");
+        element.append('<input id="coordinatedImagePreviewControlOpenButton" class="coordinatedImagePreviewControlButton" type="image" src="img/icon/abrir_img.png" alt="Submit" title="' + options.openButtonTitle + '">');
+
+        var parent = $("#map").parent();
+        parent.append('<div id="coordinatedImagePreviewControlMainDiv" class="coordinatedImagePreviewControlMainDiv content horizontal-images"><ul id="coordinatedImagePreviewControlListUl" class="coordinatedImagePreviewControlUl"></ul></div>');
+
+        $('#coordinatedImagePreviewControlMainDiv').append('<input id="coordinatedImagePreviewControlCloseButton" class="coordinatedImagePreviewControlButton" type="image" src="img/icon/cerrar_img.png" alt="Submit" title="' + options.closeButtonTitle + '">');
+
+        // Delegación de eventos para la lista de imágenes (más eficiente y confiable)
+        var $list = $("#coordinatedImagePreviewControlListUl");
+
+        $list.on('mouseenter', 'li.coordinatedImagePreviewControlLi', function () {
+            imageListElementMouseEnter(this);
+        });
+
+        $list.on('mouseleave', 'li.coordinatedImagePreviewControlLi', function () {
+            imageListElementMouseLeave(this);
+        });
+
+        $list.on('click', 'li.coordinatedImagePreviewControlLi a', function (e) {
+            var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            var $li = $(this).closest('li');
+            var index = parseInt($li.attr('id').substr(32));
+
+            if (isTouch) {
+                if (window.activeCoordinatedImageIndex !== index) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    imageListElementMouseEnter($li[0]);
+                    window.activeCoordinatedImageIndex = index;
+                } else {
+                    // Segundo toque: Abrir lightbox
+                    window.activeCoordinatedImageIndex = -1;
+                }
+            }
+        });
+
+        $list.on('contextmenu', 'li.coordinatedImagePreviewControlLi', function (e) {
+            e.preventDefault();
+        });
+
+        $list.on('mousedown', 'li.coordinatedImagePreviewControlLi', function () {
+            imageListElementMouseDown(this);
+        });
+
+        $("#coordinatedImagePreviewControlOpenButton").click(function () {
+            $("#coordinatedImagePreviewControlMainDiv")[0].style.visibility = "visible";
+            map.on('moveend zoomend', CoordinatedImagePreviewControlMoveEndFunction);
+            $("#coordinatedImagePreviewControlMenuImage").addClass("coordinatedImagePreviewControlCloseMenuImage");
+            $("#coordinatedImagePreviewControlMenuImage").removeClass("coordinatedImagePreviewControlOpenMenuImage");
+            $("#coordinatedImagePreviewControlOpenButton")[0].style.visibility = "hidden";
+            queryPictures();
+        });
+
+        $("#coordinatedImagePreviewControlCloseButton").click(function () {
+            $("#coordinatedImagePreviewControlMainDiv")[0].style.visibility = "hidden";
+            map.off('moveend zoomend', CoordinatedImagePreviewControlMoveEndFunction);
+            $("#coordinatedImagePreviewControlMenuImage").removeClass("coordinatedImagePreviewControlCloseMenuImage");
+            $("#coordinatedImagePreviewControlMenuImage").addClass("coordinatedImagePreviewControlOpenMenuImage");
+            $("#coordinatedImagePreviewControlOpenButton")[0].style.visibility = "visible";
+        });
+
+        if (options.isOpen) {
+            $("#coordinatedImagePreviewControlOpenButton")[0].click();
+        }
+    }
+
+    var CoordinatedImagePreviewControlMoveEndFunction = function () {
+        queryPictures();
+    };
+
+    function renderPictures(featureCollection) {
+        if (!map || typeof map.getBounds !== 'function') return;
+
+        // Añadimos un pequeño margen (pad 0.03) para incluir fotos tomadas en las inmediaciones del track
+        var bounds = map.getBounds().pad(0.03);
+        lastImages = featureCollection.features;
+
+        var htmlItems = [];
+
+        for (var i = 0; i < lastImages.length; i++) {
+            var feature = lastImages[i];
+            var coords = feature.geometry.coordinates;
+
+            // GeoJSON coordinates son [longitud, latitud] -> L.latLng(lat, lng)
+            if (bounds.contains(L.latLng(coords[1], coords[0]))) {
+                var title = feature.properties.title || "";
+                var desc = feature.properties.description || title;
+
+                htmlItems.push(
+                    '<li id="coordinatedImagePreviewControlLi' + i + '" class="coordinatedImagePreviewControlLi">' +
+                    '<a class="example-image-link" href="' + feature.properties.imageLink + '" data-lightbox="example-set" data-title="' + desc + '">' +
+                    '<img width="100" height="66.66" class="example-image" loading="lazy" src="' + feature.properties.thumbnailLink + '" alt="' + title + '"/>' +
+                    '</a></li>'
+                );
+            }
+        }
+
+        $("#coordinatedImagePreviewControlListUl").html(htmlItems.join(''));
+    }
+
+    function queryPictures() {
+        if (cachedGeoJson) {
+            renderPictures(cachedGeoJson);
+            return;
+        }
+
+        if (isLoadingGeoJson) {
+            return;
+        }
+
+        isLoadingGeoJson = true;
+        $.ajax({
+            url: options.imageServiceAddress,
+            type: 'GET',
+            dataType: 'json',
+            success: function (featureCollection) {
+                isLoadingGeoJson = false;
+                cachedGeoJson = featureCollection;
+                renderPictures(cachedGeoJson);
+            },
+            error: function (err) {
+                isLoadingGeoJson = false;
+                console.error("Error al cargar fotos:", err);
+            }
+        });
+    }
+
+    function imageListElementMouseEnter(imageListElement) {
+        var index = parseInt(imageListElement.id.substr(32));
+        if (lastImages && lastImages[index]) {
+            addTempMarker(lastImages[index]);
+        }
+    }
+
+    function imageListElementMouseLeave() {
+        if (coordinatedImagePreviewControlTempMarker) {
+            map.removeLayer(coordinatedImagePreviewControlTempMarker);
+            coordinatedImagePreviewControlTempMarker = undefined;
+        }
+        window.activeCoordinatedImageIndex = -1;
+    }
+
+    function imageListElementMouseDown(imageListElement) {
+        var index = parseInt(imageListElement.id.substr(32));
+        if (lastImages && lastImages[index]) {
+            lastImages[index].id;
+        }
+    }
+
+    function addTempMarker(data) {
+        if (coordinatedImagePreviewControlTempMarker !== undefined) {
+            map.removeLayer(coordinatedImagePreviewControlTempMarker);
+            coordinatedImagePreviewControlTempMarker = undefined;
+        }
+        coordinatedImagePreviewControlTempMarker = L.geoJson(data, {
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {bounceOnAdd: true, bounceOnAddOptions: {duration: 500, height: 100}});
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip(feature.properties.title, {permanent: true, direction: 'auto'}).addTo(map);
+            }
+        }).addTo(map);
+    }
+})(jQuery);
